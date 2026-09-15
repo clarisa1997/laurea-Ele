@@ -285,6 +285,21 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
 .foot-links a{color:var(--muted);text-decoration:none;font-weight:600}
 .foot-links a:hover{color:var(--ink)}
 
+/* -------------------------- schede fauna / codici rossi -------------------------- */
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:720px){.facts{grid-template-columns:1fr}}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+.fact.red{background:color-mix(in srgb,var(--coral) 8%,var(--surface));border-color:color-mix(in srgb,var(--coral) 40%,var(--line))}
+.fact > h3{font-size:22px;margin-bottom:4px}
+.fact > .sub{color:var(--muted);font-size:14px;margin-bottom:16px}
+.entry{padding:12px 0;border-top:1px solid var(--line)}
+.entry:first-of-type{border-top:0}
+.entry .who{font-weight:700;font-size:17px;display:flex;align-items:center;gap:8px}
+.entry .who .badge{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  padding:3px 9px;border-radius:100px;background:color-mix(in srgb,var(--coral) 16%,var(--surface));color:var(--coral-deep)}
+.entry .who .badge.ok{background:color-mix(in srgb,var(--primary) 16%,var(--surface));color:var(--primary-deep)}
+.entry p{margin:6px 0 0;color:var(--muted);font-size:15.5px}
+
 /* -------------------------- formule fisica/matematica -------------------------- */
 .formula{font-family:"Source Sans 3",serif;font-style:italic;font-weight:600;
   font-variant-numeric:tabular-nums;white-space:nowrap}

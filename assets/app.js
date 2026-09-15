@@ -4,9 +4,10 @@
 window.SITE = {
   nome: "Ele",                       // nome della festeggiata
   titolo: "Fisica Medica",           // corso di laurea
-  citta: "Roma",
-  dataFesta: "2026-10-15T18:00:00",  // data/ora della festa (formato AAAA-MM-GGThh:mm:ss)
-  labelData: "15 ottobre 2026"       // come mostrarla in chiaro
+  citta: "Pisa",
+  dataFesta: "2026-09-23T16:30:00",  // data/ora della laurea (formato AAAA-MM-GGThh:mm:ss)
+  labelData: "23 settembre 2026",    // come mostrarla in chiaro
+  aperitivo: "aperitivo dalle 19:30" // quando si festeggia
 };
 
 /* =====================================================================
@@ -100,7 +101,7 @@ window.SITE = {
     function tick(){
       var diff = target - Date.now();
       if(isNaN(target)){ cd.innerHTML = '<div class="cd-msg">Aggiungi la data della festa in assets/app.js</div>'; return; }
-      if(diff <= 0){ cd.innerHTML = '<div class="cd-msg">🎓 È IL GIORNO! Daje Dottoressa '+S.nome+'!</div>'; return; }
+      if(diff <= 0){ cd.innerHTML = '<div class="cd-msg">🎓 OGGI SE LAUREA! Daje Dottoressa '+S.nome+' — se beve! 🥂</div>'; return; }
       var d = Math.floor(diff/86400000);
       var h = Math.floor(diff%86400000/3600000);
       var m = Math.floor(diff%3600000/60000);
@@ -141,5 +142,92 @@ window.SITE = {
   document.querySelectorAll("[data-site]").forEach(function(el){
     var k = el.getAttribute("data-site");
     if(S[k]!=null) el.textContent = S[k];
+  });
+
+  /* =====================================================================
+     EASTER EGG 🥚 — cliccando certe parti succedono cose
+     ===================================================================== */
+  var reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+  // stile per toast e coriandoli (iniettato una volta sola)
+  var st = document.createElement("style");
+  st.textContent =
+    ".egg-toast{position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom,0px));"+
+    "transform:translateX(-50%) translateY(20px);z-index:9999;max-width:min(90vw,420px);"+
+    "background:var(--ink);color:var(--bg);padding:13px 20px;border-radius:100px;"+
+    "font-weight:700;font-size:15.5px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.3);"+
+    "opacity:0;transition:opacity .25s,transform .25s;pointer-events:none}"+
+    ".egg-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}"+
+    ".egg-bit{position:fixed;top:-40px;z-index:9998;font-size:24px;pointer-events:none;will-change:transform;"+
+    "animation:eggfall linear forwards}"+
+    "@keyframes eggfall{to{transform:translateY(105vh) rotate(540deg);opacity:.9}}";
+  document.head.appendChild(st);
+
+  var toastEl, toastT;
+  function toast(msg){
+    if(!toastEl){ toastEl=document.createElement("div"); toastEl.className="egg-toast";
+      toastEl.setAttribute("role","status"); document.body.appendChild(toastEl); }
+    toastEl.innerHTML=msg; void toastEl.offsetWidth; toastEl.classList.add("show");
+    clearTimeout(toastT); toastT=setTimeout(function(){ toastEl.classList.remove("show"); },3200);
+  }
+  function coriandoli(emojis,n){
+    if(reduce) return;
+    emojis = emojis || ["🎓","🎉","🥂","❤️","💉","🩺"];
+    n = n || 28;
+    for(var i=0;i<n;i++){(function(i){
+      var b=document.createElement("div"); b.className="egg-bit";
+      b.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+      b.style.left=(Math.random()*100)+"vw";
+      var dur=(2.2+Math.random()*1.8);
+      b.style.animationDuration=dur+"s";
+      b.style.fontSize=(18+Math.random()*20)+"px";
+      document.body.appendChild(b);
+      setTimeout(function(){ b.remove(); }, dur*1000+200);
+    })(i);}
+  }
+
+  // 1) click sulla croce (logo) → dose de auguri
+  var cross=document.querySelector(".cross");
+  if(cross){ cross.style.cursor="pointer";
+    cross.parentElement.addEventListener("click",function(e){
+      e.preventDefault(); coriandoli(); toast("💉 Dose de auguri somministrata! Daje Dottoressa "+S.nome+"!");
+    });
+  }
+
+  // 2) click sul nome nell'hero → battute segrete a rotazione
+  var battute=[
+    "🦵 Oggi niente sport: c'ha er ginocchio (de novo).",
+    "😴 Sta a dormì, richiama tra tre ore.",
+    "🎾 L'unico sport concesso dar ginocchio: er padel.",
+    "🍝 Localizzata: da Branzo. O all'Alligalli. Dipende.",
+    "⏰ \"5 minuti e arivo\" — parti pure, la trovi tra due ore.",
+    "🛒 In missione ar Lidl. O all'Action. O all'IKEA. Torna cor carrello pieno.",
+    "🎃🎄 Sta addobbà casa. È sempre stagione, pe' lei.",
+    "🔧 Luigi, servirebbe 'n'artra cosa... (Luigi trema).",
+    "🔔 Emanuela Perini bussa: 'abbassate 'sta musica!'",
+    "🚨 Codice rosso: perde er lavandino. (Era 'na goccia.)"
+  ];
+  var bi=0, nameEl=document.querySelector(".hero-title .hi, .prognosi .big em");
+  if(nameEl){ nameEl.style.cursor="pointer"; nameEl.title="cliccami 👀";
+    nameEl.addEventListener("click",function(){ toast(battute[bi%battute.length]); bi++; });
+  }
+
+  // 3) doppio click sull'elettrocardiogramma → battito
+  document.querySelectorAll(".ecg").forEach(function(ecg){
+    ecg.style.cursor="pointer";
+    ecg.addEventListener("dblclick",function(){ coriandoli(["❤️"],14); toast("❤️ Battito rilevato: 110 e lode, ritmo regolare."); });
+  });
+
+  // 4) cinque click sul countdown → scusa der ginocchio
+  var cdEgg=document.getElementById("countdown"), cdN=0;
+  if(cdEgg){ cdEgg.addEventListener("click",function(){ cdN++;
+    if(cdN===5){ cdN=0; toast("🦵 Er ginocchio conta alla rovescia pe' la prossima scusa."); } }); }
+
+  // 5) codice Konami (↑↑↓↓←→←→ B A) → modalità festa
+  var seq=["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"], pos=0;
+  document.addEventListener("keydown",function(e){
+    var k=e.key.length===1?e.key.toLowerCase():e.key;
+    pos=(k===seq[pos])?pos+1:(k===seq[0]?1:0);
+    if(pos===seq.length){ pos=0; coriandoli(null,60); toast("🎉 MODALITÀ FESTA ATTIVATA! 🥂 Se beve!"); }
   });
 })();
