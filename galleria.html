@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Radiografie · Cartella Clinica di Ele</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="nav-mount"></div>
+
+<header class="page-hero"><div class="wrap page-hero-in">
+  <span class="crumb">Reparto 05 · Diagnostica per immagini</span>
+  <h1>Radiografie</h1>
+  <p>Le immagini storiche (e imbarazzanti) della paziente. Clicca 'na lastra pe' vederla in grande.</p>
+</div></header>
+
+<main>
+<section><div class="wrap">
+  <div class="info-band"><span class="bic">🩻</span>
+    <div>PER TE: metti qui le foto vere. Ogni cornice è un posto pronto — quando c'hai le immagini,
+      dimmi "aggiungi le foto" e le inserisco io (basta metterle nella cartella <b>assets</b>).</div></div>
+
+  <div class="rx-grid">
+    <!-- MODIFICA QUI: metti <img src="assets/foto1.jpg" alt="..."> dentro la .rx-frame -->
+    <div class="rx-frame"><img alt=""><div class="ph"><span class="ic">🩻</span>Lastra 01<br>La matricola</div></div>
+    <div class="rx-frame"><img alt=""><div class="ph"><span class="ic">🩻</span>Lastra 02<br>In biblioteca</div></div>
+    <div class="rx-frame"><img alt=""><div class="ph"><span class="ic">🩻</span>Lastra 03<br>La banda</div></div>
+    <div class="rx-frame"><img alt=""><div class="ph"><span class="ic">🩻</span>Lastra 04<br>Ar laboratorio</div></div>
+    <div class="rx-frame"><img alt=""><div class="ph"><span class="ic">🩻</span>Lastra 05<br>La tesi</div></div>
+    <div class="rx-frame"><img alt=""><div class="ph"><span class="ic">🩻</span>Lastra 06<br>La festa</div></div>
+  </div>
+</div></section>
+</main>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Immagine ingrandita">
+  <button class="close" type="button" aria-label="Chiudi">×</button>
+  <img alt="">
+</div>
+
+<div id="footer-mount"></div>
+<script src="assets/app.js"></script>
+</body>
+</html>
