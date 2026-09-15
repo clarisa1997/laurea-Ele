@@ -199,18 +199,18 @@ window.SITE = {
 
   // 2) click sul nome nell'hero → battute a rotazione
   var battute=[
-    "Oggi niente sport: c'ha er ginocchio. Di novo.",
-    "Sta a dormì. Richiama tra tre ore.",
-    "L'unico sport ammesso dar ginocchio: er padel.",
-    "Se nun risponde, è da Branzo. O all'Alligalli.",
-    "\"Cinque minuti e arivo\": parti pure, la trovi tra due ore.",
+    "Oggi niente sport: c'hai er ginocchio. Di novo.",
+    "Stai a dormì. Ritenta tra tre ore.",
+    "L'unico sport che te concedi: er padel.",
+    "Se nun rispondi, sei da Branzo. O all'Alligalli.",
+    "\"Cinque minuti e arivo\": lo sappiamo, arrivi tra due ore.",
     "In missione ar Lidl. O all'Action. O all'IKEA.",
-    "Sta a addobbà casa: pe' lei è sempre stagione.",
+    "Stai a addobbà casa: pe' te è sempre stagione.",
     "Luigi, servirebbe 'n'artra cosa. (Luigi trema.)",
     "Emanuela Perini bussa: 'abbassate 'sta musica'.",
-    "Codice rosso: perde er lavandino. Era 'na goccia."
+    "Codice rosso: te perde er lavandino. Era 'na goccia."
   ];
-  var bi=0, nameEl=document.querySelector(".hero-title .hi, .prognosi .big em");
+  var bi=0, nameEl=document.querySelector(".hero .hi, .prognosi .big em");
   if(nameEl){ nameEl.style.cursor="pointer"; nameEl.title="cliccami";
     nameEl.addEventListener("click",function(){ toast(battute[bi%battute.length]); bi++; });
   }
