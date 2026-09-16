@@ -233,4 +233,39 @@ window.SITE = {
     pos=(k===seq[pos])?pos+1:(k===seq[0]?1:0);
     if(pos===seq.length){ pos=0; coriandoli(null,60); toast("Modalità festa attivata."); }
   });
+
+  // 6) scrivi "ele" sulla tastiera → festa
+  var eseq="ele", epos=0;
+  document.addEventListener("keydown",function(e){
+    if(!e.key||e.key.length!==1) return;
+    var k=e.key.toLowerCase();
+    epos=(k===eseq[epos])?epos+1:(k===eseq[0]?1:0);
+    if(epos===eseq.length){ epos=0; coriandoli(null,40); toast("E-L-E: sei number one."); }
+  });
+
+  // 7) click sul timbro "Approvato ar bar"
+  var timbro=document.querySelector(".timbro");
+  if(timbro){ timbro.style.cursor="pointer";
+    timbro.addEventListener("click",function(){ coriandoli(["#E14B4B","#12B886"],12);
+      toast("Timbro ufficiale. Vale più de 'na marca da bollo."); }); }
+
+  // 8) click sui valori delle analisi → commenti a rotazione
+  var vb=["Fuori scala, come previsto.","'Sto numero nun se batte.","Confermato in laboratorio.","Record personale.","Manco l'OMS ce crede."], vi=0;
+  document.querySelectorAll(".analisi .val").forEach(function(v){ v.style.cursor="pointer";
+    v.addEventListener("click",function(){ toast(vb[vi%vb.length]); vi++; }); });
+
+  // 9) click sul titolo della tesi
+  var tesi=document.querySelector(".tl em");
+  if(tesi){ tesi.style.cursor="help";
+    tesi.addEventListener("click",function(){ toast("Tradotto: roba difficilissima. Fidati e applaudi."); }); }
+
+  // 10) click su una card "codice rosso"
+  var red=document.querySelector(".fact.red");
+  if(red){ red.style.cursor="pointer";
+    red.addEventListener("click",function(){ toast("Codice rosso rientrato. Respira, è tutto ok."); }); }
+
+  // 11) click sul simbolo ℞ della prescrizione
+  var rx=document.querySelector(".rx");
+  if(rx){ rx.style.cursor="pointer";
+    rx.addEventListener("click",function(){ coriandoli(null,18); toast("Prescrizione: 3 spritz al giorno, dopo i pasti."); }); }
 })();
