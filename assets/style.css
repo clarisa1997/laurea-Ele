@@ -247,6 +247,16 @@ h2.head{font-size:clamp(28px,5.5vw,44px);letter-spacing:-.01em}
   color:var(--primary-deep);font-weight:600;font-size:15px}
 .info-band .bic{font-size:20px;line-height:1.2}
 
+/* -------------------------- muro screenshot -------------------------- */
+.shots{columns:3;column-gap:16px}
+@media(max-width:900px){.shots{columns:2}}
+@media(max-width:560px){.shots{columns:1}}
+.shot{break-inside:avoid;margin-bottom:16px;border-radius:14px;overflow:hidden;
+  border:1px solid var(--line);box-shadow:var(--shadow);cursor:zoom-in;background:var(--surface);
+  transition:transform .16s ease,box-shadow .16s ease}
+.shot:hover{transform:translateY(-2px)}
+.shot img{width:100%;display:block}
+
 /* -------------------------- radiografie (galleria + lightbox) -------------------------- */
 .rx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media(max-width:760px){.rx-grid{grid-template-columns:repeat(2,1fr)}}

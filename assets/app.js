@@ -128,7 +128,7 @@ window.SITE = {
   var lb = document.getElementById("lightbox");
   if(lb){
     var lbImg = lb.querySelector("img");
-    document.querySelectorAll(".rx-frame img").forEach(function(img){
+    document.querySelectorAll(".rx-frame img, .shot img").forEach(function(img){
       img.parentElement.addEventListener("click",function(){
         if(!img.getAttribute("src")) return;
         lbImg.src = img.src; lbImg.alt = img.alt; lb.classList.add("show");
