@@ -257,6 +257,8 @@ h2.head{font-size:clamp(28px,5.5vw,44px);letter-spacing:-.01em}
 .shot:hover{transform:translateY(-2px)}
 .shot img{width:100%;display:block}
 .shot .scap{padding:9px 13px;font-size:13.5px;font-weight:600;color:var(--muted)}
+.shot video{width:100%;display:block;background:#000}
+.shot.vid{cursor:default}
 
 /* -------------------------- radiografie (galleria + lightbox) -------------------------- */
 .rx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
