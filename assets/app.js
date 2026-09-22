@@ -212,7 +212,7 @@ window.SITE = {
   /* --- bottone finale del biglietto --- */
   var endBtn=document.getElementById("endBtn"), endLine=document.getElementById("endLine");
   if(endBtn){ endBtn.addEventListener("click",function(){
-    if(endLine) endLine.classList.add("show");
+    if(endLine){ endLine.style.display="block"; endLine.classList.add("show"); }
     endBtn.style.display="none";
     confetti(null,90);
   }); }
