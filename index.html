@@ -3,102 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Cartella Clinica di Ele</title>
+<title>Auguri Ele</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<div id="nav-mount"></div>
+
+<header class="topbar"><div class="topbar-in">
+  <a class="logo" href="index.html"><span class="dot" aria-hidden="true"></span><b>Auguri Ele</b></a>
+</div></header>
 
 <header class="hero">
-  <div class="hero-cross-bg"></div>
-  <div class="math-bg" aria-hidden="true">
-    <span style="top:12%;left:6%;font-size:80px">∫</span>
-    <span style="top:60%;left:3%;font-size:54px">λ</span>
-    <span style="top:20%;right:7%;font-size:64px">Σ</span>
-    <span style="top:68%;right:5%;font-size:70px">√</span>
-    <span style="top:42%;left:48%;font-size:48px">π</span>
-    <span style="top:8%;right:38%;font-size:44px">∂</span>
+  <div class="confetti" aria-hidden="true">
+    <i style="top:14%;left:8%;background:#7A5AF8"></i>
+    <i style="top:24%;left:88%;background:#FF5CA0"></i>
+    <i style="top:60%;left:6%;background:#18C7B6"></i>
+    <i style="top:70%;left:92%;background:#FFC42E"></i>
+    <i style="top:40%;left:80%;background:#FF7A45"></i>
+    <i style="top:82%;left:30%;background:#7A5AF8"></i>
+    <i style="top:12%;left:60%;background:#18C7B6"></i>
   </div>
   <div class="wrap hero-in">
-    <span class="pill"><span class="d"></span> Referto di laurea · esito positivo</span>
-    <h1>Aho <span class="hi" data-site="nome">Ele</span>, te stai a laureà!</h1>
-    <p class="sub">Dopo anni de medicina, fisica e matematica — tra dosi, decadimenti e integrali
-      che nun finivano mai — e ce l'hai fatta: sei <b>Dottoressa in <span data-site="titolo">Fisica Medica</span></b>.
-      Er tuo referto ufficiale è qui sotto.</p>
-
-    <div class="formula-strip">
-      <span class="chip-f"><span class="cf-l">Dose de studio</span><span class="formula">D = E / m</span></span>
-      <span class="chip-f"><span class="cf-l">Decadimento der divano</span><span class="formula">N(t) = N<sub>0</sub> e<sup>−λt</sup></span></span>
-      <span class="chip-f"><span class="cf-l">Integrale de caffeina</span><span class="formula">∫ caffè dt = ∞</span></span>
-    </div>
-
+    <span class="eyebrow"><span data-site="labelData">23 settembre 2026</span> · <span data-site="citta">Pisa</span></span>
+    <h1>Auguri<br>Dottoressa <span class="name" data-site="nome">Ele</span></h1>
+    <p class="sub">Oggi ti laurei in <b>Fisica Medica</b>. Prima di fà festa, però,
+      c'è un piccolo percorso da fà — tutto su di te — che finisce co' 'na sorpresa. Vai avanti.</p>
     <div class="countdown" id="countdown" aria-live="polite"></div>
+    <div class="next-wrap" style="margin-top:30px"><a class="next" href="lei.html">Comincia →</a></div>
   </div>
-  <svg class="ecg" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0,20 L360,20 L380,20 L392,6 L404,34 L416,20 L560,20 L572,20 L584,2 L600,38 L616,20 L820,20 L832,10 L844,30 L856,20 L1200,20"></path>
-  </svg>
 </header>
 
-<main>
-<section><div class="wrap">
-  <span class="lbl">Reparti della cartella</span>
-  <h2 class="head">Esplora tutto er ricovero</h2>
-  <p class="lead">Ogni reparto racconta un pezzo della tua carriera. Entra dove te pare —
-    so' tutti fatti pe' te.</p>
+<footer><div class="wrap foot-in">
+  <div>Fatto co' affetto pe' la laurea de <span data-site="nome">Ele</span> · <span data-site="citta">Pisa</span></div>
+</div></footer>
 
-  <div class="nav-cards">
-    <a class="ncard" href="papiro.html">
-      <h3>Il Papiro</h3>
-      <p>La tua condanna goliardica ufficiale, timbrata ar bar.</p>
-      <span class="go">Leggi la sentenza →</span>
-    </a>
-    <a class="ncard" href="referto.html">
-      <h3>Le Analisi</h3>
-      <p>I tuoi valori: dosi, caffeina e numeri fuori scala.</p>
-      <span class="go">Vedi i referti →</span>
-    </a>
-    <a class="ncard" href="percorso.html">
-      <h3>Anamnesi</h3>
-      <p>La tua storia clinica: da matricola a dottoressa.</p>
-      <span class="go">Ripercorri tutto →</span>
-    </a>
-    <a class="ncard" href="muro.html">
-      <h3>Il Muro</h3>
-      <p>I messaggi leggendari che ci hai mandato. Da antologia.</p>
-      <span class="go">Entra ner muro →</span>
-    </a>
-    <a class="ncard" href="galleria.html">
-      <h3>Radiografie</h3>
-      <p>Le tue immagini storiche (e imbarazzanti), in alta risoluzione.</p>
-      <span class="go">Apri le lastre →</span>
-    </a>
-    <a class="ncard" href="auguri.html">
-      <h3>Prognosi</h3>
-      <p>Esito finale e auguri de tutti gli amici.</p>
-      <span class="go">Leggi la prognosi →</span>
-    </a>
-  </div>
-</div></section>
-
-<section class="section-alt"><div class="wrap">
-  <span class="lbl">Formulario goliardico</span>
-  <h2 class="head">Le leggi della tua carriera</h2>
-  <p class="lead">Tre principi scientifici verificati sperimentalmente su tutta la durata del corso.</p>
-  <div class="formulario">
-    <div class="fbox"><div class="fx">t<sub>arrivo</sub> = t<sub>detto</sub> + 2h</div>
-      <div class="cap">La tua legge dei "5 minuti e arivo": costante additiva de due ore, sempre.</div></div>
-    <div class="fbox coral"><div class="fx">Sport = { padel }</div>
-      <div class="cap">L'unico sport che te concedi. Tutto er resto, dice er ginocchio, è controindicato — referto ortopedico mai pervenuto.</div></div>
-    <div class="fbox blue"><div class="fx">sonno(t) → max</div>
-      <div class="cap">Pe' te er sonno è sacro: lo massimizzi a ogni occasione utile, weekend in primis.</div></div>
-  </div>
-</div></section>
-</main>
-
-<div id="footer-mount"></div>
 <script src="assets/app.js"></script>
 </body>
 </html>
