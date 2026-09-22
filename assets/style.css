@@ -58,10 +58,10 @@ img{max-width:100%;display:block}
 a{color:var(--violet-text)}
 h1,h2,h3{font-family:"Unbounded","Nunito",sans-serif;font-weight:700;line-height:1.02;
   text-wrap:balance;margin:0;letter-spacing:-.01em}
-.ico{display:inline-block;vertical-align:-.14em;margin-right:.28em}
-h1 .ico,h2 .ico{height:.78em}
-h3 .ico{height:.85em}
-.k .ico{height:1.1em;margin-right:.25em;vertical-align:-.15em}
+.title-ico{display:inline-flex;align-items:center;gap:.3em}
+.ico{display:block;width:auto;flex:none}
+.title-ico.ico-h1 .ico,.title-ico.ico-h2 .ico{height:.72em}
+.title-ico.ico-h3 .ico{height:.8em}
 .wrap{max-width:1080px;margin:0 auto;padding-inline:22px}
 .eyebrow{display:inline-block;font-family:"Unbounded",sans-serif;font-weight:600;font-size:12px;
   letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);
@@ -183,7 +183,8 @@ h2.head{font-size:clamp(28px,5.6vw,48px)}
 @media(max-width:520px){.quirks{grid-template-columns:1fr}}
 .quirk{background:var(--surface);border:3px solid var(--ink);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
 .quirk .k{font-family:"Unbounded",sans-serif;font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
-  display:inline-block;color:#fff;border-radius:100px;padding:4px 11px;margin-bottom:12px}
+  display:inline-flex;align-items:center;gap:.35em;color:#fff;border-radius:100px;padding:4px 11px;margin-bottom:12px}
+.quirk .k .ico{height:1em}
 .quirk:nth-child(6n+1) .k{background:var(--violet)}
 .quirk:nth-child(6n+2) .k{background:var(--pink)}
 .quirk:nth-child(6n+3) .k{background:var(--teal)}
