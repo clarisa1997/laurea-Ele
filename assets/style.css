@@ -297,6 +297,10 @@ button.next{cursor:pointer;font:inherit;font-family:"Unbounded",sans-serif;font-
   color:var(--muted);margin-bottom:10px}
 .msg-todo{margin:8px auto 0;max-width:44ch;min-height:96px;display:flex;align-items:center;justify-content:center;
   border:3px dashed var(--ink);border-radius:16px;padding:22px;color:var(--muted);font-style:italic;opacity:.75}
+.end-line{display:none;margin:20px auto 0;max-width:30ch;text-align:center;font-family:"Unbounded",sans-serif;
+  font-weight:700;font-size:clamp(19px,3.6vw,27px);line-height:1.2;color:var(--ink)}
+.end-line.show{display:block;animation:eggpop .35s ease}
+@keyframes eggpop{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
 
 /* ---------------- footer ---------------- */
 footer{border-top:3px solid var(--ink);padding-block:26px;color:var(--muted);font-weight:700;font-size:14px}

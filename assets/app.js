@@ -209,6 +209,14 @@ window.SITE = {
   /* --- coriandoli d'ingresso sul biglietto --- */
   if(document.querySelector(".biglietto")) setTimeout(function(){ confetti(null,70); },250);
 
+  /* --- bottone finale del biglietto --- */
+  var endBtn=document.getElementById("endBtn"), endLine=document.getElementById("endLine");
+  if(endBtn){ endBtn.addEventListener("click",function(){
+    if(endLine) endLine.classList.add("show");
+    endBtn.style.display="none";
+    confetti(null,90);
+  }); }
+
   /* --- easter egg: clic su varie parti = coriandoli --- */
   var cap=document.querySelector(".logo .cap");
   if(cap){ cap.style.cursor="pointer";
