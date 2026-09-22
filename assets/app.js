@@ -239,6 +239,12 @@ window.SITE = {
         if(!img.getAttribute("src"))return; lbImg.src=img.src; lbImg.alt=img.alt; lb.classList.add("show");
       });
     });
+    document.querySelectorAll("[data-photo]").forEach(function(el){
+      el.style.cursor="pointer";
+      el.addEventListener("click",function(){
+        lbImg.src=el.getAttribute("data-photo"); lbImg.alt=""; lb.classList.add("show");
+      });
+    });
     lb.addEventListener("click",function(){ lb.classList.remove("show"); lbImg.src=""; });
     document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ lb.classList.remove("show"); lbImg.src=""; }});
   }
