@@ -110,16 +110,28 @@ window.SITE = {
         label=adv.getAttribute("data-label")||"Avanti →";
     function mk(txt,extra){ var b=document.createElement("button"); b.type="button";
       b.className="next "+ncls+(extra?(" "+extra):""); b.textContent=txt; return b; }
+    // via il link statico di fallback: da qui in poi comanda il gioco
+    adv.querySelectorAll(".adv-fallback").forEach(function(x){ x.remove(); });
 
     if(type==="dodge"){
       adv.classList.add("adv-dodge");
       var b=mk(label); adv.appendChild(b);
-      var d=0, max=3, hints=["Eh, prima me devi pijà!","Aò, so' più veloce io.","Ok ok, ancora una…","E vabbè, hai vinto tu."];
-      function jump(){ var dx=(Math.random()*2-1)*135, dy=(Math.random()*2-1)*38;
-        b.style.transform="translate("+dx+"px,"+dy+"px)"; }
-      function tease(){ d++; if(d<=max){ jump(); toast(hints[Math.min(d-1,hints.length-1)]); if(d===max) b.textContent="Pijame mo' →"; } }
-      b.addEventListener("mouseenter",function(){ if(d<max) tease(); });
-      b.addEventListener("click",function(){ if(d<max){ tease(); } else { confetti(null,30); go(href); } });
+      var d=0, max=7, last=0,
+          hints=["Eh, prima me devi pijà!","Aò, so' più veloce io.","Nun ce piji manco co' la mira.","'Nnamo, provace.","Quasi… ma no.","T'ho fregato n'artra vòta.","E vabbè, hai vinto tu."];
+      function jump(){
+        var w=adv.clientWidth||320, h=adv.clientHeight||240,
+            bw=b.offsetWidth||160, bh=b.offsetHeight||58,
+            mx=Math.max(30,(w-bw)/2-6), my=Math.max(28,(h-bh)/2-6),
+            dx=(Math.random()*2-1)*mx, dy=(Math.random()*2-1)*my;
+        b.style.transform="translate("+dx+"px,"+dy+"px)";
+      }
+      function tease(){ if(d<max){ d++; jump(); toast(hints[Math.min(d-1,hints.length-1)]); if(d>=max) b.textContent="Pijame mo' →"; } }
+      adv.addEventListener("mousemove",function(e){
+        if(d>=max) return;
+        var r=b.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2;
+        if(Math.hypot(e.clientX-cx,e.clientY-cy)<95 && Date.now()-last>150){ last=Date.now(); tease(); }
+      });
+      b.addEventListener("click",function(e){ if(d<max){ e.preventDefault(); tease(); } else { confetti(null,30); go(href); } });
     }
     else if(type==="twice"){
       var b=mk(label); adv.appendChild(b); var n=0;
