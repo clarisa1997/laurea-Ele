@@ -121,4 +121,24 @@ window.SITE = {
 
   /* --- coriandoli d'ingresso sul biglietto --- */
   if(document.querySelector(".biglietto")) setTimeout(function(){ confetti(null,70); },250);
+
+  /* --- easter egg: clic su varie parti = coriandoli --- */
+  var cap=document.querySelector(".logo .cap");
+  if(cap){ cap.style.cursor="pointer";
+    cap.addEventListener("click",function(e){ e.preventDefault(); e.stopPropagation(); confetti(null,50); }); }
+  document.querySelectorAll(".eyebrow").forEach(function(el){ el.style.cursor="pointer";
+    el.addEventListener("click",function(){ confetti(null,26); }); });
+  document.querySelectorAll(".hero h1, .page-hero h1").forEach(function(el){ el.style.cursor="pointer";
+    el.addEventListener("click",function(){ confetti(null,55); }); });
+  var cdBoom=document.getElementById("countdown");
+  if(cdBoom){ cdBoom.style.cursor="pointer"; cdBoom.addEventListener("click",function(){ confetti(null,40); }); }
+
+  /* --- easter egg: scrivi "ele" = festa --- */
+  var eseq="ele", epos=0;
+  document.addEventListener("keydown",function(e){
+    if(!e.key||e.key.length!==1) return;
+    var k=e.key.toLowerCase();
+    epos=(k===eseq[epos])?epos+1:(k===eseq[0]?1:0);
+    if(epos===eseq.length){ epos=0; confetti(null,90); toast("E-L-E: numero uno!"); }
+  });
 })();
