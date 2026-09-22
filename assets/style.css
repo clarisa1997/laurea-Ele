@@ -58,6 +58,10 @@ img{max-width:100%;display:block}
 a{color:var(--violet-text)}
 h1,h2,h3{font-family:"Unbounded","Nunito",sans-serif;font-weight:700;line-height:1.02;
   text-wrap:balance;margin:0;letter-spacing:-.01em}
+.ico{display:inline-block;vertical-align:-.14em;margin-right:.28em}
+h1 .ico,h2 .ico{height:.78em}
+h3 .ico{height:.85em}
+.k .ico{height:1.1em;margin-right:.25em;vertical-align:-.15em}
 .wrap{max-width:1080px;margin:0 auto;padding-inline:22px}
 .eyebrow{display:inline-block;font-family:"Unbounded",sans-serif;font-weight:600;font-size:12px;
   letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);
