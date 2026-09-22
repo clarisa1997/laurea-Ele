@@ -119,11 +119,6 @@ window.SITE = {
     });
   }
 
-  /* --- easter egg: click sul pallino del logo --- */
-  var dot=document.querySelector(".logo .dot");
-  if(dot){ dot.style.cursor="pointer";
-    dot.parentElement.addEventListener("click",function(e){ e.preventDefault(); confetti(null,50); }); }
-
   /* --- coriandoli d'ingresso sul biglietto --- */
   if(document.querySelector(".biglietto")) setTimeout(function(){ confetti(null,70); },250);
 })();

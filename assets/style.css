@@ -46,8 +46,7 @@ h1,h2,h3{font-family:"Unbounded","Nunito",sans-serif;font-weight:700;line-height
 .nav-in{display:flex;align-items:center;justify-content:space-between;gap:14px;
   max-width:1080px;margin:0 auto;padding:11px 22px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
-.logo .dot{width:26px;height:26px;border-radius:50%;flex:none;
-  background:conic-gradient(var(--violet),var(--pink),var(--yellow),var(--teal),var(--violet))}
+.logo .cap{width:36px;height:auto;flex:none;display:block}
 .logo b{font-family:"Unbounded",sans-serif;font-weight:700;font-size:16px;letter-spacing:-.02em;white-space:nowrap}
 .nav-links{display:flex;align-items:center;gap:4px}
 .nav-links a{text-decoration:none;color:var(--muted);font-weight:800;font-size:15px;padding:8px 13px;
@@ -227,6 +226,17 @@ h2.head{font-size:clamp(28px,5.6vw,48px)}
 .shot img{width:100%;display:block}
 .shot video{width:100%;display:block;background:#000}
 .shot.vid{cursor:default}
+.shot .scap{padding:11px 14px;font-family:"Unbounded",sans-serif;font-weight:600;font-size:14.5px;color:var(--ink)}
+.grid{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+.grid .shot{flex:1 1 240px;max-width:330px;margin:0}
+
+/* ---------------- decori fisica medica (solo grafica) ---------------- */
+.sci{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.sci span{position:absolute;font-family:"Unbounded",sans-serif;font-weight:700;color:var(--violet);
+  opacity:.12;line-height:1}
+.page-hero{position:relative;overflow:hidden}
+.page-hero::after{content:"γ";position:absolute;right:14px;top:-8px;font-family:"Unbounded",sans-serif;
+  font-weight:700;font-size:120px;color:var(--violet);opacity:.08;pointer-events:none}
 
 /* ---------------- audio ---------------- */
 .audiobox{background:var(--surface);border:3px solid var(--ink);border-radius:18px;padding:16px 18px;
