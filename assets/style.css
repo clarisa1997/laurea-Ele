@@ -74,6 +74,16 @@ h1,h2,h3{font-family:"Unbounded","Nunito",sans-serif;font-weight:700;line-height
 .back{font-weight:800;text-decoration:none;color:var(--violet-deep);border:2px solid var(--ink);border-radius:100px;
   padding:7px 15px;background:var(--surface);white-space:nowrap;box-shadow:2px 2px 0 var(--ink)}
 .back:hover{background:var(--bg)}
+.nav-tools{display:flex;gap:8px;align-items:center}
+.navtool{background:var(--surface);border:2px solid var(--ink);border-radius:100px;font:inherit;font-weight:800;
+  font-size:14px;padding:7px 13px;cursor:pointer;box-shadow:2px 2px 0 var(--ink);color:var(--ink)}
+.navtool:hover{background:var(--bg)}
+.navtool.round{width:38px;height:38px;padding:0;display:inline-grid;place-items:center;font-size:17px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));
+  transform:translateX(-50%) translateY(16px);z-index:80;max-width:min(90vw,460px);background:var(--ink);color:#fff;
+  padding:13px 20px;border-radius:14px;font-weight:800;text-align:center;box-shadow:5px 5px 0 rgba(0,0,0,.25);
+  opacity:0;transition:opacity .25s,transform .25s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* ---------------- HERO ---------------- */
 .hero{position:relative;overflow:hidden;border-bottom:3px solid var(--ink);
@@ -217,6 +227,12 @@ h2.head{font-size:clamp(28px,5.6vw,48px)}
 .shot img{width:100%;display:block}
 .shot video{width:100%;display:block;background:#000}
 .shot.vid{cursor:default}
+
+/* ---------------- audio ---------------- */
+.audiobox{background:var(--surface);border:3px solid var(--ink);border-radius:18px;padding:16px 18px;
+  box-shadow:var(--shadow);margin-bottom:22px;display:flex;flex-direction:column;gap:10px}
+.audiobox .lab{font-family:"Unbounded",sans-serif;font-weight:700;font-size:15px}
+.audiobox audio{width:100%}
 
 /* ---------------- lightbox ---------------- */
 .lightbox{position:fixed;inset:0;z-index:60;background:rgba(20,15,40,.92);display:none;align-items:center;justify-content:center;padding:24px}

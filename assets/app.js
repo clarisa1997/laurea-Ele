@@ -16,6 +16,26 @@ window.SITE = {
     var k=el.getAttribute("data-site"); if(S[k]!=null) el.textContent=S[k];
   });
 
+  /* --- toast --- */
+  var toastEl,toastT;
+  function toast(msg){
+    if(!toastEl){ toastEl=document.createElement("div"); toastEl.className="toast";
+      toastEl.setAttribute("role","status"); document.body.appendChild(toastEl); }
+    toastEl.textContent=msg; void toastEl.offsetWidth; toastEl.classList.add("show");
+    clearTimeout(toastT); toastT=setTimeout(function(){ toastEl.classList.remove("show"); },3400);
+  }
+
+  /* --- bottoni finti nella barra (easter egg) --- */
+  var tbar=document.querySelector(".topbar-in");
+  if(tbar){
+    var tools=document.createElement("div"); tools.className="nav-tools";
+    tools.innerHTML='<button class="navtool" id="fakeDark" type="button">Dark</button>'
+      +'<button class="navtool round" id="fakeInfo" type="button" aria-label="Info">?</button>';
+    tbar.appendChild(tools);
+    document.getElementById("fakeInfo").addEventListener("click",function(){ toast("Ma che c'è da capì? Goditela e basta."); });
+    document.getElementById("fakeDark").addEventListener("click",function(){ toast("Aò, er budget era quello. Che t'aspettavi?"); });
+  }
+
   /* --- coriandoli --- */
   function confetti(colors,n){
     if(reduce) return;
@@ -64,22 +84,13 @@ window.SITE = {
     tick(); setInterval(tick,1000);
   }
 
-  /* --- gioco: indovina il regalo --- */
-  var guesses=document.getElementById("guesses");
-  if(guesses){
-    var fb=document.getElementById("giftFb"), reveal=document.getElementById("giftReveal"), done=false;
-    guesses.addEventListener("click",function(e){
-      var b=e.target.closest("button"); if(!b||done) return;
-      if(b.dataset.correct==="1"){
-        done=true; b.classList.add("right");
-        guesses.querySelectorAll("button").forEach(function(x){ if(x!==b) x.classList.add("wrong"); });
-        if(fb) fb.textContent="Esatto!";
-        if(reveal) reveal.classList.add("show");
-        confetti(null,70);
-      } else {
-        b.classList.add("wrong");
-        if(fb) fb.textContent="Nooo. Indizio: fa vento e costa un rene. Riprova.";
-      }
+  /* --- gioco: rivela il regalo --- */
+  var revealBtn=document.getElementById("revealBtn");
+  if(revealBtn){
+    revealBtn.addEventListener("click",function(){
+      var r=document.getElementById("giftReveal"); if(r) r.classList.add("show");
+      if(revealBtn.parentElement) revealBtn.parentElement.style.display="none";
+      confetti(null,80);
     });
   }
 
