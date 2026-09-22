@@ -11,6 +11,9 @@ window.SITE = {
 (function(){
   var S = window.SITE, reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
 
+  // tema salvato (lo scherzo "Dark" che poi diventa vero)
+  try{ if(localStorage.getItem("eleTheme")==="dark") document.documentElement.setAttribute("data-theme","dark"); }catch(e){}
+
   // testo nei segnaposto [data-site]
   document.querySelectorAll("[data-site]").forEach(function(el){
     var k=el.getAttribute("data-site"); if(S[k]!=null) el.textContent=S[k];
@@ -33,7 +36,26 @@ window.SITE = {
       +'<button class="navtool round" id="fakeInfo" type="button" aria-label="Info">?</button>';
     tbar.appendChild(tools);
     document.getElementById("fakeInfo").addEventListener("click",function(){ toast("Ma che c'è da capì? Goditela e basta."); });
-    document.getElementById("fakeDark").addEventListener("click",function(){ toast("Aò, er budget era quello. Che t'aspettavi?"); });
+
+    var htmlEl=document.documentElement, darkBtn=document.getElementById("fakeDark");
+    function isDark(){ return htmlEl.getAttribute("data-theme")==="dark"; }
+    function setDark(on){
+      if(on) htmlEl.setAttribute("data-theme","dark"); else htmlEl.removeAttribute("data-theme");
+      try{ localStorage.setItem("eleTheme", on?"dark":"light"); }catch(e){}
+      if(darkBtn) darkBtn.textContent = on?"Light":"Dark";
+    }
+    if(darkBtn){
+      darkBtn.textContent = isDark()?"Light":"Dark";
+      var armed=false;
+      darkBtn.addEventListener("click",function(){
+        if(isDark()){ setDark(false); toast("E rimettemo la luce, va'."); return; }
+        if(!armed){
+          armed=true;
+          toast("Aò, er budget era quello. Che t'aspettavi?");
+          setTimeout(function(){ setDark(true); toast("Tò, te piace de più? C'avevi preso pe' pezzenti?"); confetti(null,34); },1600);
+        } else { setDark(true); toast("Tò, te piace de più? C'avevi preso pe' pezzenti?"); confetti(null,34); }
+      });
+    }
   }
 
   /* --- coriandoli (co' roba de medicina e matematica) --- */

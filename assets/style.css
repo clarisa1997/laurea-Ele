@@ -22,6 +22,18 @@
   --shadow-hard:6px 6px 0 var(--ink);
   color-scheme:light;
 }
+:root[data-theme="dark"]{
+  --bg:#141126;
+  --surface:#221C40;
+  --ink:#F2EEFF;
+  --muted:#B4AAD6;
+  --line:#2E2850;
+  --line-strong:#3B3468;
+  --shadow:0 3px 0 rgba(0,0,0,.25),0 16px 34px rgba(0,0,0,.5);
+  color-scheme:dark;
+}
+html{transition:background .45s ease}
+body{transition:background .45s ease,color .45s ease}
 *{box-sizing:border-box}
 html,body{margin:0}
 html{scroll-behavior:smooth}
