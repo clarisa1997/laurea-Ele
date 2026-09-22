@@ -295,6 +295,8 @@ button.next{cursor:pointer;font:inherit;font-family:"Unbounded",sans-serif;font-
 .next.orange{background:var(--orange)}.next.orange:hover{background:var(--orange-deep)}
 .step-hint{text-align:center;font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
   color:var(--muted);margin-bottom:10px}
+.msg-todo{margin:8px auto 0;max-width:44ch;min-height:96px;display:flex;align-items:center;justify-content:center;
+  border:3px dashed var(--ink);border-radius:16px;padding:22px;color:var(--muted);font-style:italic;opacity:.75}
 
 /* ---------------- footer ---------------- */
 footer{border-top:3px solid var(--ink);padding-block:26px;color:var(--muted);font-weight:700;font-size:14px}
