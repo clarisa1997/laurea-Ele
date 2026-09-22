@@ -36,18 +36,25 @@ window.SITE = {
     document.getElementById("fakeDark").addEventListener("click",function(){ toast("Aò, er budget era quello. Che t'aspettavi?"); });
   }
 
-  /* --- coriandoli --- */
+  /* --- coriandoli (co' roba de medicina e matematica) --- */
+  var GLYPHS=["💉","🩺","🧬","💊","🧪","🩹","π","∫","Σ","√","λ","γ","∞","θ"];
   function confetti(colors,n){
     if(reduce) return;
     colors=colors||["#7A5AF8","#FF5CA0","#FFC42E","#18C7B6","#FF7A45"];
     n=n||36;
     for(var i=0;i<n;i++){(function(){
+      var glyph=Math.random()<0.4;
       var b=document.createElement("div"); b.className="egg-bit";
-      b.style.background=colors[Math.floor(Math.random()*colors.length)];
       b.style.left=(Math.random()*100)+"vw";
       var dur=2.2+Math.random()*1.9; b.style.animationDuration=dur+"s";
-      b.style.opacity=0.7+Math.random()*0.3;
-      b.style.transform="scale("+(0.6+Math.random()*1.1)+")";
+      b.style.opacity=0.75+Math.random()*0.25;
+      if(glyph){
+        b.classList.add("egg-glyph");
+        b.textContent=GLYPHS[Math.floor(Math.random()*GLYPHS.length)];
+        b.style.fontSize=(17+Math.random()*17)+"px";
+      } else {
+        b.style.background=colors[Math.floor(Math.random()*colors.length)];
+      }
       document.body.appendChild(b);
       setTimeout(function(){ b.remove(); },dur*1000+200);
     })();}
@@ -93,6 +100,74 @@ window.SITE = {
       confetti(null,80);
     });
   }
+
+  /* --- bottoni-gioco pe' andà avanti --- */
+  function go(href){ if(href) window.location.href=href; }
+  document.querySelectorAll(".adv").forEach(function(adv){
+    var type=adv.getAttribute("data-adv"),
+        href=adv.getAttribute("data-href"),
+        ncls=adv.getAttribute("data-next-class")||"",
+        label=adv.getAttribute("data-label")||"Avanti →";
+    function mk(txt,extra){ var b=document.createElement("button"); b.type="button";
+      b.className="next "+ncls+(extra?(" "+extra):""); b.textContent=txt; return b; }
+
+    if(type==="dodge"){
+      adv.classList.add("adv-dodge");
+      var b=mk(label); adv.appendChild(b);
+      var d=0, max=3, hints=["Eh, prima me devi pijà!","Aò, so' più veloce io.","Ok ok, ancora una…","E vabbè, hai vinto tu."];
+      function jump(){ var dx=(Math.random()*2-1)*135, dy=(Math.random()*2-1)*38;
+        b.style.transform="translate("+dx+"px,"+dy+"px)"; }
+      function tease(){ d++; if(d<=max){ jump(); toast(hints[Math.min(d-1,hints.length-1)]); if(d===max) b.textContent="Pijame mo' →"; } }
+      b.addEventListener("mouseenter",function(){ if(d<max) tease(); });
+      b.addEventListener("click",function(){ if(d<max){ tease(); } else { confetti(null,30); go(href); } });
+    }
+    else if(type==="twice"){
+      var b=mk(label); adv.appendChild(b); var n=0;
+      b.addEventListener("click",function(){ n++;
+        if(n<2){ toast("Aò, 'sto click nun ha fatto gnente. Riprova."); b.textContent="Avanti (davero stavolta) →"; }
+        else go(href); });
+    }
+    else if(type==="mash"){
+      var need=parseInt(adv.getAttribute("data-need")||"5",10), cur=0;
+      var b=mk(""); adv.appendChild(b);
+      var bar=document.createElement("div"); bar.className="adv-bar";
+      var fill=document.createElement("span"); bar.appendChild(fill); adv.appendChild(bar);
+      function upd(){ b.textContent=cur>=need?label:("Spingi forte! ("+cur+"/"+need+")");
+        fill.style.width=Math.min(100,cur/need*100)+"%"; }
+      upd();
+      b.addEventListener("click",function(){ if(cur>=need){ go(href); return; }
+        cur++; upd(); confetti(null,6);
+        if(cur>=need){ toast("E mo' vola!"); confetti(null,44); } });
+    }
+    else if(type==="quiz"){
+      var q=adv.getAttribute("data-q"),
+          opts=(adv.getAttribute("data-opts")||"").split("|"),
+          right=parseInt(adv.getAttribute("data-right")||"0",10),
+          okmsg=adv.getAttribute("data-ok")||"Esatto. La conosci bene.",
+          nomsg=adv.getAttribute("data-no")||"Ma quanno mai. Riprova.",
+          done=false;
+      var qEl=document.createElement("div"); qEl.className="adv-q"; qEl.textContent=q; adv.appendChild(qEl);
+      var wrap=document.createElement("div"); wrap.className="adv-opts"; adv.appendChild(wrap);
+      opts.forEach(function(o,i){ var b=mk(o,"opt");
+        b.addEventListener("click",function(){ if(done)return;
+          if(i===right){ done=true; toast(okmsg); confetti(null,34);
+            wrap.querySelectorAll("button").forEach(function(x){ x.disabled=true; });
+            var g=mk(label); adv.appendChild(g); g.addEventListener("click",function(){ go(href); }); }
+          else { toast(nomsg); b.disabled=true; } });
+        wrap.appendChild(b); });
+    }
+    else if(type==="pick"){
+      var picks=(adv.getAttribute("data-picks")||"").split("|"),
+          rp=parseInt(adv.getAttribute("data-right")||"0",10),
+          pno=adv.getAttribute("data-no")||"Naa, nun è questo. Prova n'artro.";
+      var wrap=document.createElement("div"); wrap.className="adv-opts"; adv.appendChild(wrap);
+      picks.forEach(function(o,i){ var b=mk(o,"opt");
+        b.addEventListener("click",function(){ if(i===rp){ confetti(null,44); go(href); }
+          else { toast(pno); b.disabled=true; } });
+        wrap.appendChild(b); });
+    }
+    else { var b=mk(label); b.addEventListener("click",function(){ go(href); }); adv.appendChild(b); }
+  });
 
   /* --- lightbox --- */
   var lb=document.getElementById("lightbox");
