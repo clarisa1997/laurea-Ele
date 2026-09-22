@@ -226,6 +226,9 @@ h2.head{font-size:clamp(28px,5.6vw,48px)}
 .shot img{width:100%;display:block}
 .shot video{width:100%;display:block;background:#000}
 .shot.vid{cursor:default}
+.shot.audio-card{padding:16px 16px 18px;background:linear-gradient(150deg,#E9FBF8,#FDF3FB);cursor:default}
+.shot.audio-card .eyebrow{margin:0}
+.shot.audio-card .audiobox{border-width:2px;box-shadow:none;margin-top:0}
 .shot .scap{padding:11px 14px;font-family:"Unbounded",sans-serif;font-weight:600;font-size:14.5px;color:var(--ink)}
 .grid{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
 .grid .shot{flex:1 1 240px;max-width:330px;margin:0}
