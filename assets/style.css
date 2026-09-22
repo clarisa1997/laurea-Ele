@@ -20,6 +20,12 @@
   --orange-deep:#E85C24;
   --shadow:0 3px 0 rgba(42,35,80,.05),0 16px 34px rgba(122,90,248,.10);
   --shadow-hard:6px 6px 0 var(--ink);
+  /* accenti usati come TESTO (i *-deep restano pe' li sfondi) */
+  --violet-text:var(--violet-deep);
+  --pink-text:var(--pink-deep);
+  --teal-text:var(--teal-deep);
+  --orange-text:var(--orange-deep);
+  --on-light:#2A2350;   /* testo su sfondi sempre chiari (giallo, ecc.) */
   color-scheme:light;
 }
 :root[data-theme="dark"]{
@@ -30,6 +36,11 @@
   --line:#2E2850;
   --line-strong:#3B3468;
   --shadow:0 3px 0 rgba(0,0,0,.25),0 16px 34px rgba(0,0,0,.5);
+  /* schiariti, sinnò è viola su viola e nun se legge 'na mazza */
+  --violet-text:#BEACFF;
+  --pink-text:#FF93C1;
+  --teal-text:#57E6D5;
+  --orange-text:#FFA57C;
   color-scheme:dark;
 }
 html{transition:background .45s ease}
@@ -44,12 +55,12 @@ body{
 }
 img{max-width:100%;display:block}
 [hidden]{display:none!important}
-a{color:var(--violet-deep)}
+a{color:var(--violet-text)}
 h1,h2,h3{font-family:"Unbounded","Nunito",sans-serif;font-weight:700;line-height:1.02;
   text-wrap:balance;margin:0;letter-spacing:-.01em}
 .wrap{max-width:1080px;margin:0 auto;padding-inline:22px}
 .eyebrow{display:inline-block;font-family:"Unbounded",sans-serif;font-weight:600;font-size:12px;
-  letter-spacing:.12em;text-transform:uppercase;color:var(--violet-deep);
+  letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);
   background:color-mix(in srgb,var(--violet) 14%,var(--surface));border-radius:100px;padding:6px 14px}
 
 /* ---------------- NAV ---------------- */
@@ -64,7 +75,7 @@ h1,h2,h3{font-family:"Unbounded","Nunito",sans-serif;font-weight:700;line-height
 .nav-links a{text-decoration:none;color:var(--muted);font-weight:800;font-size:15px;padding:8px 13px;
   border-radius:100px;white-space:nowrap}
 .nav-links a:hover{color:var(--ink);background:var(--bg)}
-.nav-links a.active{color:var(--violet-deep);background:color-mix(in srgb,var(--violet) 14%,transparent)}
+.nav-links a.active{color:var(--violet-text);background:color-mix(in srgb,var(--violet) 14%,transparent)}
 .burger{display:none;background:var(--surface);border:2px solid var(--ink);border-radius:100px;
   font:inherit;font-weight:800;font-size:14px;padding:7px 14px;cursor:pointer}
 @media(max-width:860px){
@@ -82,7 +93,7 @@ h1,h2,h3{font-family:"Unbounded","Nunito",sans-serif;font-weight:700;line-height
 /* ---------------- topbar (niente menu, solo logo + torna) ---------------- */
 .topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--surface);border-bottom:3px solid var(--ink)}
 .topbar-in{display:flex;align-items:center;justify-content:space-between;gap:14px;max-width:1080px;margin:0 auto;padding:11px 22px}
-.back{font-weight:800;text-decoration:none;color:var(--violet-deep);border:2px solid var(--ink);border-radius:100px;
+.back{font-weight:800;text-decoration:none;color:var(--violet-text);border:2px solid var(--ink);border-radius:100px;
   padding:7px 15px;background:var(--surface);white-space:nowrap;box-shadow:2px 2px 0 var(--ink)}
 .back:hover{background:var(--bg)}
 .nav-tools{display:flex;gap:8px;align-items:center}
@@ -91,7 +102,7 @@ h1,h2,h3{font-family:"Unbounded","Nunito",sans-serif;font-weight:700;line-height
 .navtool:hover{background:var(--bg)}
 .navtool.round{width:38px;height:38px;padding:0;display:inline-grid;place-items:center;font-size:17px}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));
-  transform:translateX(-50%) translateY(16px);z-index:80;max-width:min(90vw,460px);background:var(--ink);color:#fff;
+  transform:translateX(-50%) translateY(16px);z-index:80;max-width:min(90vw,460px);background:var(--ink);color:var(--bg);
   padding:13px 20px;border-radius:14px;font-weight:800;text-align:center;box-shadow:5px 5px 0 rgba(0,0,0,.25);
   opacity:0;transition:opacity .25s,transform .25s;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -119,12 +130,12 @@ h1,h2,h3{font-family:"Unbounded","Nunito",sans-serif;font-weight:700;line-height
   box-shadow:5px 5px 0 var(--ink)}
 .cd-box .n{font-family:"Unbounded",sans-serif;font-weight:700;font-size:clamp(26px,6vw,40px);line-height:1;
   font-variant-numeric:tabular-nums}
-.cd-box:nth-child(1) .n{color:var(--violet-deep)}
-.cd-box:nth-child(2) .n{color:var(--pink-deep)}
-.cd-box:nth-child(3) .n{color:var(--teal-deep)}
-.cd-box:nth-child(4) .n{color:var(--orange-deep)}
+.cd-box:nth-child(1) .n{color:var(--violet-text)}
+.cd-box:nth-child(2) .n{color:var(--pink-text)}
+.cd-box:nth-child(3) .n{color:var(--teal-text)}
+.cd-box:nth-child(4) .n{color:var(--orange-text)}
 .cd-box .l{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:800;margin-top:7px}
-.cd-msg{font-family:"Unbounded",sans-serif;font-weight:700;font-size:clamp(22px,4.2vw,32px);color:var(--pink-deep);margin-top:24px}
+.cd-msg{font-family:"Unbounded",sans-serif;font-weight:700;font-size:clamp(22px,4.2vw,32px);color:var(--pink-text);margin-top:24px}
 
 /* ---------------- page hero (inner) ---------------- */
 .page-hero{border-bottom:3px solid var(--ink);background:
@@ -188,13 +199,13 @@ h2.head{font-size:clamp(28px,5.6vw,48px)}
 .item .who{font-family:"Unbounded",sans-serif;font-weight:700;font-size:17px}
 .item p{margin:6px 0 0;color:var(--muted);font-weight:600;font-size:15.5px}
 .badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
-  padding:3px 10px;border-radius:100px;background:var(--yellow);color:var(--ink);margin-left:6px;vertical-align:middle}
+  padding:3px 10px;border-radius:100px;background:var(--yellow);color:var(--on-light);margin-left:6px;vertical-align:middle}
 
 /* ---------------- tesi ---------------- */
 .tesi{background:var(--surface);border:3px solid var(--ink);border-radius:20px;padding:clamp(22px,4vw,40px);
   box-shadow:var(--shadow-hard)}
 .tesi .title-real{font-family:"Unbounded",sans-serif;font-weight:600;font-size:clamp(16px,2.4vw,20px);
-  color:var(--violet-deep);line-height:1.3;margin:6px 0 18px}
+  color:var(--violet-text);line-height:1.3;margin:6px 0 18px}
 .tesi p{margin:0 0 12px;font-weight:600}
 
 /* ---------------- indovina il regalo ---------------- */
@@ -229,14 +240,14 @@ h2.head{font-size:clamp(28px,5.6vw,48px)}
 button.next{cursor:pointer;font:inherit;font-family:"Unbounded",sans-serif;font-weight:700;
   font-size:clamp(18px,3vw,24px);line-height:1}
 .adv{display:flex;flex-direction:column;align-items:center;gap:12px}
-.adv-dodge{position:relative;min-height:240px;justify-content:center;width:100%;overflow:hidden}
-@media(max-width:560px){.adv-dodge{min-height:280px}}
+.adv-dodge{position:relative;min-height:360px;justify-content:center;width:100%;overflow:hidden}
+@media(max-width:560px){.adv-dodge{min-height:400px}}
 .adv-dodge .next{transition:transform .18s cubic-bezier(.2,.8,.3,1.2),box-shadow .12s ease,background .12s ease}
 .adv-q{font-family:"Unbounded",sans-serif;font-weight:600;font-size:clamp(17px,2.6vw,21px);
   color:var(--ink);text-align:center;max-width:32ch}
 .adv-opts{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
 .adv .next.opt{font-size:clamp(15px,2.2vw,18px);padding:12px 22px;background:var(--surface);color:var(--ink)}
-.adv .next.opt:hover{background:#fff}
+.adv .next.opt:hover{background:color-mix(in srgb,var(--ink) 10%,var(--surface))}
 .adv .next.opt:disabled{opacity:.4;cursor:not-allowed}
 .adv-bar{width:min(280px,80%);height:16px;border:3px solid var(--ink);border-radius:100px;
   background:var(--surface);overflow:hidden}
@@ -257,7 +268,8 @@ button.next{cursor:pointer;font:inherit;font-family:"Unbounded",sans-serif;font-
 .shot img{width:100%;display:block}
 .shot video{width:100%;display:block;background:#000}
 .shot.vid{cursor:default}
-.shot.audio-card{padding:16px 16px 18px;background:linear-gradient(150deg,#E9FBF8,#FDF3FB);cursor:default}
+.shot.audio-card{padding:16px 16px 18px;cursor:default;
+  background:linear-gradient(150deg,color-mix(in srgb,var(--teal) 13%,var(--surface)),color-mix(in srgb,var(--pink) 11%,var(--surface)))}
 .shot.audio-card .eyebrow{margin:0}
 .shot.audio-card .audiobox{border-width:2px;box-shadow:none;margin-top:0}
 .shot .scap{padding:11px 14px;font-family:"Unbounded",sans-serif;font-weight:600;font-size:14.5px;color:var(--ink)}

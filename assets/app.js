@@ -35,7 +35,7 @@ window.SITE = {
     tools.innerHTML='<button class="navtool" id="fakeDark" type="button">Dark</button>'
       +'<button class="navtool round" id="fakeInfo" type="button" aria-label="Info">?</button>';
     tbar.appendChild(tools);
-    document.getElementById("fakeInfo").addEventListener("click",function(){ toast("Ma che c'è da capì? Goditela e basta."); });
+    document.getElementById("fakeInfo").addEventListener("click",function(){ toast("Ma che c'è da capì? Mica ce vole 'na laurea."); });
 
     var htmlEl=document.documentElement, darkBtn=document.getElementById("fakeDark");
     function isDark(){ return htmlEl.getAttribute("data-theme")==="dark"; }
@@ -52,7 +52,8 @@ window.SITE = {
         if(!armed){
           armed=true;
           toast("Aò, er budget era quello. Che t'aspettavi?");
-          setTimeout(function(){ setDark(true); toast("Tò, te piace de più? C'avevi preso pe' pezzenti?"); confetti(null,34); },1600);
+          setTimeout(function(){ toast("Vabbè dai, famme cercà l'interruttore…"); },3200);
+          setTimeout(function(){ setDark(true); toast("Tò, te piace de più? C'avevi preso pe' pezzenti?"); confetti(null,34); },6000);
         } else { setDark(true); toast("Tò, te piace de più? C'avevi preso pe' pezzenti?"); confetti(null,34); }
       });
     }
@@ -138,22 +139,29 @@ window.SITE = {
     if(type==="dodge"){
       adv.classList.add("adv-dodge");
       var b=mk(label); adv.appendChild(b);
-      var d=0, max=7, last=0,
-          hints=["Eh, prima me devi pijà!","Aò, so' più veloce io.","Nun ce piji manco co' la mira.","'Nnamo, provace.","Quasi… ma no.","T'ho fregato n'artra vòta.","E vabbè, hai vinto tu."];
-      function jump(){
+      var d=0, max=9, last=0,
+          hints=["Eh, prima me devi pijà!","Aò, so' più veloce io.","Nun ce piji manco co' la mira.","'Nnamo, provace.","Quasi… ma no.","T'ho fregato n'artra vòta.","Ancora? Nun demorde eh.","Ammazza che testardaggine.","E vabbè, hai vinto tu."];
+      // se sa dóve sta er puntatore scappa dall'artra parte, sinnò va a caso
+      function jump(px,py){
         var w=adv.clientWidth||320, h=adv.clientHeight||240,
             bw=b.offsetWidth||160, bh=b.offsetHeight||58,
             mx=Math.max(30,(w-bw)/2-6), my=Math.max(28,(h-bh)/2-6),
-            dx=(Math.random()*2-1)*mx, dy=(Math.random()*2-1)*my;
-        b.style.transform="translate("+dx+"px,"+dy+"px)";
+            r=adv.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2,
+            bx=0, by=0, best=-1;
+        for(var i=0;i<24;i++){
+          var tx=(Math.random()*2-1)*mx, ty=(Math.random()*2-1)*my,
+              sc=(px==null)?Math.random():Math.hypot(cx+tx-px,cy+ty-py);
+          if(sc>best){ best=sc; bx=tx; by=ty; }
+        }
+        b.style.transform="translate("+bx+"px,"+by+"px)";
       }
-      function tease(){ if(d<max){ d++; jump(); toast(hints[Math.min(d-1,hints.length-1)]); if(d>=max) b.textContent="Pijame mo' →"; } }
+      function tease(px,py){ if(d<max){ d++; jump(px,py); toast(hints[Math.min(d-1,hints.length-1)]); if(d>=max) b.textContent="Pijame mo' →"; } }
       adv.addEventListener("mousemove",function(e){
         if(d>=max) return;
         var r=b.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2;
-        if(Math.hypot(e.clientX-cx,e.clientY-cy)<95 && Date.now()-last>150){ last=Date.now(); tease(); }
+        if(Math.hypot(e.clientX-cx,e.clientY-cy)<130 && Date.now()-last>90){ last=Date.now(); tease(e.clientX,e.clientY); }
       });
-      b.addEventListener("click",function(e){ if(d<max){ e.preventDefault(); tease(); } else { confetti(null,30); go(href); } });
+      b.addEventListener("click",function(e){ if(d<max){ e.preventDefault(); tease(e.clientX||null,e.clientY||null); } else { confetti(null,30); go(href); } });
     }
     else if(type==="twice"){
       var b=mk(label); adv.appendChild(b); var n=0;
