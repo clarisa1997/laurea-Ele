@@ -35,7 +35,7 @@ window.SITE = {
     tools.innerHTML='<button class="navtool" id="fakeDark" type="button">Dark</button>'
       +'<button class="navtool round" id="fakeInfo" type="button" aria-label="Info">?</button>';
     tbar.appendChild(tools);
-    document.getElementById("fakeInfo").addEventListener("click",function(){ toast("Ma che c'è da capì? Mica ce vole 'na laurea."); });
+    document.getElementById("fakeInfo").addEventListener("click",function(){ toast("Ma che c'è da capì? Mica ce vò 'na laurea."); });
 
     var htmlEl=document.documentElement, darkBtn=document.getElementById("fakeDark");
     function isDark(){ return htmlEl.getAttribute("data-theme")==="dark"; }
