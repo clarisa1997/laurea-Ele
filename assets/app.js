@@ -139,18 +139,15 @@ window.SITE = {
     if(type==="dodge"){
       adv.classList.add("adv-dodge");
       var b=mk(label); adv.appendChild(b);
-      var d=0, max=9, last=0, loose=false,
-          hints=["Eh, prima me devi pijà!","Aò, so' più veloce io.","Nun ce piji manco co' la mira.","'Nnamo, provace.","Quasi… ma no.","T'ho fregato n'artra vòta.","Ancora? Nun demorde eh.","Ammazza che testardaggine.","E vabbè, hai vinto tu."];
-      var note=document.createElement("div"); note.className="adv-note";
-      note.textContent="Er bottone s'è dato a la macchia. Rincorrelo pe' la pagina.";
+      var d=0, max=15, last=0, loose=false;
       // se sa dóve sta er puntatore scappa dall'artra parte, sinnò va a caso
       function jump(px,py){
         var bw=b.offsetWidth||160, bh=b.offsetHeight||58, bx=0, by=0, best=-1, i, tx, ty, sc;
         if(loose){
-          // libero pe' tutto lo schermo: sta lontano da barra in cima e toast in fondo
+          // libero pe' tutto lo schermo, lontano da barra in cima e bordi
           var pad=14, top=86,
               maxX=Math.max(pad,window.innerWidth-bw-pad),
-              maxY=Math.max(top,window.innerHeight-bh-100);
+              maxY=Math.max(top,window.innerHeight-bh-20);
           for(i=0;i<28;i++){
             tx=pad+Math.random()*(maxX-pad); ty=top+Math.random()*(maxY-top);
             sc=(px==null)?Math.random():Math.hypot(tx+bw/2-px,ty+bh/2-py);
@@ -171,15 +168,12 @@ window.SITE = {
       // ar primo scatto se stacca dar riquadro e va in giro pe' tutta la pagina
       function cutLoose(){
         var r=b.getBoundingClientRect();
-        adv.classList.add("loose"); adv.appendChild(note);
+        adv.classList.add("loose");
         b.style.transform="translate("+r.left+"px,"+r.top+"px)";
         void b.offsetWidth;   // reflow, sinnò nun se vede er volo
         loose=true;
       }
-      function tease(px,py){ if(d>=max) return;
-        d++; if(!loose) cutLoose(); jump(px,py);
-        toast(hints[Math.min(d-1,hints.length-1)]);
-        if(d>=max){ b.textContent="Pijame mo' →"; note.textContent="Mo' s'è stancato: acchiappalo."; } }
+      function tease(px,py){ if(d>=max) return; d++; if(!loose) cutLoose(); jump(px,py); }
       document.addEventListener("mousemove",function(e){
         if(d>=max) return;
         var r=b.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2;
