@@ -139,28 +139,53 @@ window.SITE = {
     if(type==="dodge"){
       adv.classList.add("adv-dodge");
       var b=mk(label); adv.appendChild(b);
-      var d=0, max=9, last=0,
+      var d=0, max=9, last=0, loose=false,
           hints=["Eh, prima me devi pijà!","Aò, so' più veloce io.","Nun ce piji manco co' la mira.","'Nnamo, provace.","Quasi… ma no.","T'ho fregato n'artra vòta.","Ancora? Nun demorde eh.","Ammazza che testardaggine.","E vabbè, hai vinto tu."];
+      var note=document.createElement("div"); note.className="adv-note";
+      note.textContent="Er bottone s'è dato a la macchia. Rincorrelo pe' la pagina.";
       // se sa dóve sta er puntatore scappa dall'artra parte, sinnò va a caso
       function jump(px,py){
-        var w=adv.clientWidth||320, h=adv.clientHeight||240,
-            bw=b.offsetWidth||160, bh=b.offsetHeight||58,
-            mx=Math.max(30,(w-bw)/2-6), my=Math.max(28,(h-bh)/2-6),
-            r=adv.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2,
-            bx=0, by=0, best=-1;
-        for(var i=0;i<24;i++){
-          var tx=(Math.random()*2-1)*mx, ty=(Math.random()*2-1)*my,
-              sc=(px==null)?Math.random():Math.hypot(cx+tx-px,cy+ty-py);
-          if(sc>best){ best=sc; bx=tx; by=ty; }
+        var bw=b.offsetWidth||160, bh=b.offsetHeight||58, bx=0, by=0, best=-1, i, tx, ty, sc;
+        if(loose){
+          // libero pe' tutto lo schermo: sta lontano da barra in cima e toast in fondo
+          var pad=14, top=86,
+              maxX=Math.max(pad,window.innerWidth-bw-pad),
+              maxY=Math.max(top,window.innerHeight-bh-100);
+          for(i=0;i<28;i++){
+            tx=pad+Math.random()*(maxX-pad); ty=top+Math.random()*(maxY-top);
+            sc=(px==null)?Math.random():Math.hypot(tx+bw/2-px,ty+bh/2-py);
+            if(sc>best){ best=sc; bx=tx; by=ty; }
+          }
+        } else {
+          var w=adv.clientWidth||320, h=adv.clientHeight||240,
+              mx=Math.max(30,(w-bw)/2-6), my=Math.max(28,(h-bh)/2-6),
+              r=adv.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2;
+          for(i=0;i<24;i++){
+            tx=(Math.random()*2-1)*mx; ty=(Math.random()*2-1)*my;
+            sc=(px==null)?Math.random():Math.hypot(cx+tx-px,cy+ty-py);
+            if(sc>best){ best=sc; bx=tx; by=ty; }
+          }
         }
         b.style.transform="translate("+bx+"px,"+by+"px)";
       }
-      function tease(px,py){ if(d<max){ d++; jump(px,py); toast(hints[Math.min(d-1,hints.length-1)]); if(d>=max) b.textContent="Pijame mo' →"; } }
-      adv.addEventListener("mousemove",function(e){
+      // ar primo scatto se stacca dar riquadro e va in giro pe' tutta la pagina
+      function cutLoose(){
+        var r=b.getBoundingClientRect();
+        adv.classList.add("loose"); adv.appendChild(note);
+        b.style.transform="translate("+r.left+"px,"+r.top+"px)";
+        void b.offsetWidth;   // reflow, sinnò nun se vede er volo
+        loose=true;
+      }
+      function tease(px,py){ if(d>=max) return;
+        d++; if(!loose) cutLoose(); jump(px,py);
+        toast(hints[Math.min(d-1,hints.length-1)]);
+        if(d>=max){ b.textContent="Pijame mo' →"; note.textContent="Mo' s'è stancato: acchiappalo."; } }
+      document.addEventListener("mousemove",function(e){
         if(d>=max) return;
         var r=b.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2;
         if(Math.hypot(e.clientX-cx,e.clientY-cy)<130 && Date.now()-last>90){ last=Date.now(); tease(e.clientX,e.clientY); }
       });
+      window.addEventListener("resize",function(){ if(loose) jump(null,null); });
       b.addEventListener("click",function(e){ if(d<max){ e.preventDefault(); tease(e.clientX||null,e.clientY||null); } else { confetti(null,30); go(href); } });
     }
     else if(type==="twice"){

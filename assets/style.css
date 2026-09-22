@@ -240,9 +240,14 @@ h2.head{font-size:clamp(28px,5.6vw,48px)}
 button.next{cursor:pointer;font:inherit;font-family:"Unbounded",sans-serif;font-weight:700;
   font-size:clamp(18px,3vw,24px);line-height:1}
 .adv{display:flex;flex-direction:column;align-items:center;gap:12px}
-.adv-dodge{position:relative;min-height:360px;justify-content:center;width:100%;overflow:hidden}
-@media(max-width:560px){.adv-dodge{min-height:400px}}
+.adv-dodge{position:relative;min-height:210px;justify-content:center;width:100%;overflow:hidden}
+@media(max-width:560px){.adv-dodge{min-height:230px}}
 .adv-dodge .next{transition:transform .18s cubic-bezier(.2,.8,.3,1.2),box-shadow .12s ease,background .12s ease}
+/* scappato dar riquadro: mo' se move pe' tutto lo schermo */
+.adv-dodge.loose{overflow:visible}
+.adv-dodge.loose .next{position:fixed;left:0;top:0;margin:0;z-index:70}
+.adv-note{font-weight:800;color:var(--muted);text-align:center;max-width:32ch;
+  border:3px dashed var(--line-strong);border-radius:16px;padding:18px 22px}
 .adv-q{font-family:"Unbounded",sans-serif;font-weight:600;font-size:clamp(17px,2.6vw,21px);
   color:var(--ink);text-align:center;max-width:32ch}
 .adv-opts{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
