@@ -281,7 +281,11 @@ window.SITE = {
   document.querySelectorAll(".hero h1, .page-hero h1").forEach(function(el){ el.style.cursor="pointer";
     el.addEventListener("click",function(){ confetti(null,55); }); });
   var cdBoom=document.getElementById("countdown");
-  if(cdBoom){ cdBoom.style.cursor="pointer"; cdBoom.addEventListener("click",function(){ confetti(null,40); }); }
+  if(cdBoom){ cdBoom.style.cursor="pointer";
+    cdBoom.addEventListener("click",function(){
+      confetti(null,40);
+    });
+  }
 
   /* --- easter egg: scrivi "ele" = festa --- */
   var eseq="ele", epos=0;
